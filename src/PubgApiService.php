@@ -8,12 +8,14 @@ class PubgApiService
     protected $pubgApi;
     protected $url = "https://api.playbattlegrounds.com/shards/";
     protected $shard = "pc-eu";
-    protected $query = "";
+	protected $result;
+    protected $query;
     protected $limit = false;
     protected $offset = false;
     protected $headers = false;
     protected $access_token = "";
-    
+ // protected $sortBy = false;
+
     public function __construct($data =[''])
     {
         $this->pubgApi = new \Ixudra\Curl\CurlService();
@@ -24,41 +26,28 @@ class PubgApiService
         $this->query = "";
     }
         
-    /**
-     * Set query data for the url
-     */
+
     public function setUrl($url ="")
     {
-		$this->query = $this->query.$url;
+		$this->query .= $url;
     }
-
-    /**
-     * Set Pubg API region
-     */
+    
     public function setShard($shard = "")
     {
 		$this->shard = $shard;
     }
-
-    /**
-     * Set pagination limit
-     */
+    
     public function setLimit($limit = false)
     {
 		$this->limit = $limit;
     }
 
-      /**
-     * Set pagination offset
-     */
     public function setOffset($offset = false)
     {
 		$this->offset = $offset;
     }
     
-	/**
-     *  Set headers
-     */
+	
 	public function setCustomHeaders()
 	{
 		$token = "Bearer $this->access_token";
@@ -114,6 +103,13 @@ class PubgApiService
         return $this;
     }
 
+/**
+    protected function setSortBy($field = "")
+    {
+        $this->sortBy = $field;
+    }
+**/
+
     /**
      * Get API Status
      */
@@ -123,9 +119,6 @@ class PubgApiService
         return $this->pubgApi->to($api_url)->withHeader('Accept: application/vnd.api+json')->asJsonResponse()->get();
     }
 
-    /**
-     * Return 
-     */
     public function data()
     {
         $url = $this->buildQuery();
@@ -135,19 +128,19 @@ class PubgApiService
     public function attributes()
     {
         $url = $this->buildQuery();
-        return $this->get()['data']->attributes;
+        return $this->data()->attributes;
     }
 
     public function relationships()
     {
         $url = $this->buildQuery();
-        return $this->get()['data']->relationships;
+        return $this->data()->relationships;
     }
 
     public function rosters()
     {
         $url = $this->buildQuery();
-        return $this->get()['data']->relationships->rosters->data;
+        return $this->data()->relationships->rosters->data;
     }
 
     public function included()
@@ -175,9 +168,7 @@ class PubgApiService
         return collect($this->pubgApi->to($url)->withHeaders($this->headers)->asJsonResponse()->get());
     }
 
-    /**
-     * Build query url for the api call
-     */
+
     protected function buildQuery()
     {
         $this->setCustomHeaders();
@@ -188,9 +179,7 @@ class PubgApiService
         return $url;
     }
     
-    /**
-     * Return url
-     */
+
     public function url()
     {
         return $this->url;

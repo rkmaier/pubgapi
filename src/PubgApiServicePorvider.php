@@ -26,7 +26,7 @@ class PubgApiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/pubgapi.php', 'PubgApi');
-        $this->app->bind('PubgApi', function ($app) {
+        $this->app->singleton('PubgApi', function ($app) {
             $config = $app->make('config');
             $data['uri'] = $config->get('PubgApi.api_url');
             $data['shards'] = $config->get('PubgApi.shards');
