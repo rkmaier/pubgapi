@@ -4,18 +4,6 @@
 
 ` composer require rkmaier/pubgapi dev-master `
 
-
-
-#### PHP without Laravel 
-
-```php
-
-require_once 'vendor/autoload.php'; 
-
-$data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>; 
-$pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); 
-$pubgAPi->region('pc-eu')->players('rkmaier,molnarz')->get());
-
 ```
 #### Laravel 5.5+ Integration
 Laravel Pacakage discovery should take care of it
@@ -79,6 +67,17 @@ PubgApi::region('pc-eu')->match('<MATCH_ID>')->get();
 ```php
 PubgApi::region('pc-eu')->players('<PLAYER_ID1>','<PLAYER_ID2>','','<PLAYER_ID3>')->limit(1)->offset(2)->get();
 ```
+
+
+#### PHP without Laravel 
+
+```php
+
+require_once 'vendor/autoload.php'; 
+
+$data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>; 
+$pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); 
+$pubgAPi->region('pc-eu')->players('rkmaier,molnarz')->get());
 
 
 
