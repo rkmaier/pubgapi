@@ -30,5 +30,5 @@
             "email": "rkmaier@gmail.com"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
