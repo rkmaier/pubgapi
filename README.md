@@ -44,12 +44,7 @@ Add the facade to your `config/app.php` file:
 return [
 
     'api_url'=>'https://api.playbattlegrounds.com/shards/',
-
-    'shards' => [
-        'eu' => 'pc-eu',
-        'na' => 'pc-na',
-    ],
-
+    'region' => 'pc-eu',
     'access_token' =>'',
 
 ];
