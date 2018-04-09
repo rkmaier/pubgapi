@@ -59,13 +59,13 @@ PubgApi::region('pc-na')
 ###### Filter by Player Names
 
 ```php
-PubgApi::region('pc-eu')->players('rkmaier,molnarz')->get();
+PubgApi::region('pc-na')->players('shroud')->get();
 ```
 
 ###### Filter by Player ID
 
 ```php
-PubgApi::region('pc-eu')->players('<PLAYER_ID>')->get();
+PubgApi::region('pc-eu')->player('<PLAYER_ID>')->get();
 ```
 
 ###### Filter by Match ID
