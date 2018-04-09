@@ -108,5 +108,5 @@ $pubgAPi->region('pc-eu')->players('rkmaier,molnarz,Istvan92,zuuup,Aigialeusz')-
 
 Pubgapi is licensed under the [MIT License](http://opensource.org/licenses/MIT).
 
-Copyright 2017 Erik Maier
+Copyright 2018 Erik Maier
 
