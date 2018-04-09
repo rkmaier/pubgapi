@@ -10,13 +10,13 @@ class PubgApiServiceProvider extends ServiceProvider
     /**
      * @var bool
      */
-    protected $defer = true;
+    protected $defer = false;
 
 
     public function boot()
     {
-        $this->publishes(['
-        __DIR__./../config/pubgapi.php'=> config_path('pubgapi.php')]);
+        $source = realpath(__DIR__.'/../config/pubgapi.php');
+        $this->publishes([$source => config_path('pubgapi.php')]);
     }
 
 
@@ -25,11 +25,16 @@ class PubgApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/pubgapi.php', 'PubgApi');
+        if (file_exists(config_path('pubgapi.php'))) {
+            $this->mergeConfigFrom(config_path('pubgapi.php'), 'PubgApi');
+        } else {
+            $this->mergeConfigFrom(realpath(__DIR__.'/../config/pubgapi.php'), 'PubgApi');
+        }
+
         $this->app->singleton('PubgApi', function ($app) {
             $config = $app->make('config');
             $data['uri'] = $config->get('PubgApi.api_url');
-            $data['shards'] = $config->get('PubgApi.shards');
+            $data['region'] = $config->get('PubgApi.region');
             $data['access_token'] = $config->get('PubgApi.access_token');
             return new PubgApiService($data);
         });

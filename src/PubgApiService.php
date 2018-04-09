@@ -20,7 +20,7 @@ class PubgApiService
         $this->pubgApi = new \Ixudra\Curl\CurlService();
         $this->url = isset($data['uri']) ? $data['uri'] : $this->url;
         $this->access_token = isset($data['access_token']) ? $data['access_token'] : "";
-		$this->shard = isset($data['shards']['eu']) ? $data['shards']['eu'] : 'pc-eu';
+		$this->region = isset($data['region']) ? $data['region'] : 'pc-eu';
 		$this->response = "";
         $this->query = "";
     }

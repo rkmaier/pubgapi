@@ -34,7 +34,7 @@ Add the facade to your `config/app.php` file:
 
 ```
 
-### Laravel
+#### Laravel
 
 ###### Set Region
 
