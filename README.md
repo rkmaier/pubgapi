@@ -1,4 +1,4 @@
-## A PHP Wrapper for the Official PUBG Dev API
+# A PHP Wrapper for the Official PUBG Dev API
 
 ## Installation 
 
