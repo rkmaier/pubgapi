@@ -4,10 +4,8 @@
 
 ` composer require rkmaier/pubgapi dev-master `
 
-```
 #### Laravel 5.5+ Integration
 Laravel Pacakage discovery should take care of it
-
 
 #### Laravel 5.* Integration
 
@@ -79,6 +77,6 @@ $data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>;
 $pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); 
 $pubgAPi->region('pc-eu')->players('rkmaier,molnarz')->get());
 
-
+```
 
 
