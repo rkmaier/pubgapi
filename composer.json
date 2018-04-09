@@ -1,6 +1,6 @@
 {
     "name": "rkmaier/pubgapi",
-    "description": "A PUBG Developer API Wrapper",
+    "description": "A PUBG Developer API Wrapper for PHP and Laravel",
     "version": "1.0.0",
     "type": "project",
     "require": {
@@ -24,7 +24,7 @@
         }
     },
     "license": "MIT",
-    "minimum-stability": "dev",
+  
     "authors": [
         {
             "name": "Erik Maier",
