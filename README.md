@@ -6,7 +6,7 @@
 
 
 
-#### Getting Started
+#### PHP without Laravel 
 
 ```php
 
@@ -47,4 +47,39 @@ Add the facade to your `config/app.php` file:
     ),
 
 ```
+
+### Laravel
+
+###### Set Region
+
+```php
+PubgApi::region('pc-na')
+```
+
+###### Filter by Player Names
+
+```php
+PubgApi::region('pc-eu')->players('rkmaier,molnarz')->get();
+```
+
+###### Filter by Player ID
+
+```php
+PubgApi::region('pc-eu')->players('<PLAYER_ID>')->get();
+```
+
+###### Filter by Match ID
+
+```php
+PubgApi::region('pc-eu')->match('<MATCH_ID>')->get();
+```
+
+###### Pagination
+
+```php
+PubgApi::region('pc-eu')->players('<PLAYER_ID1>','<PLAYER_ID2>','','<PLAYER_ID3>')->limit(1)->offset(2)->get();
+```
+
+
+
 
