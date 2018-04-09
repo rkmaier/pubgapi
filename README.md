@@ -33,8 +33,37 @@ Add the facade to your `config/app.php` file:
     ),
 
 ```
+#### Publish config file
+
+`php artisan vendor:publish`
+
+#### Edit config file
+
+```php
+
+return [
+
+    'api_url'=>'https://api.playbattlegrounds.com/shards/',
+
+    'shards' => [
+        'eu' => 'pc-eu',
+        'na' => 'pc-na',
+    ],
+
+    'access_token' =>'',
+
+];
+
+```
+
 
 #### Laravel
+
+###### Get API Status
+
+```php
+PubgApi::status()
+```
 
 ###### Set Region
 
@@ -75,7 +104,7 @@ require_once 'vendor/autoload.php';
 
 $data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>; 
 $pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); 
-$pubgAPi->region('pc-eu')->players('rkmaier,molnarz')->get());
+$pubgAPi->region('pc-eu')->players('rkmaier,molnarz,Istvan92,zuuup,Aigialeusz')->get());
 
 ```
 
