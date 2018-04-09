@@ -33,8 +33,37 @@ Add the facade to your `config/app.php` file:
     ),
 
 ```
+#### Publish config file
+
+`php artisan vendor:publish`
+
+#### Edit config file
+
+```php
+
+return [
+
+    'api_url'=>'https://api.playbattlegrounds.com/shards/',
+
+    'shards' => [
+        'eu' => 'pc-eu',
+        'na' => 'pc-na',
+    ],
+
+    'access_token' =>'',
+
+];
+
+```
+
 
 ### Laravel
+
+###### Get API Status
+
+```php
+PubgApi::status()
+```
 
 ###### Set Region
 
