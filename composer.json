@@ -1,7 +1,7 @@
 {
     "name": "rkmaier/pubgapi",
     "description": "A PUBG Developer API Wrapper",
-    "version": "dev-master",
+    "version": "0.2.0",
     "type": "project",
     "require": {
         "php": ">=5.4.0",
@@ -30,5 +30,5 @@
             "email": "rkmaier@gmail.com"
         }
     ],
-    "minimum-stability": "dev-master"
+    "minimum-stability": "0.2.0"
 }
