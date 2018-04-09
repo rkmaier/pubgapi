@@ -8,7 +8,6 @@ class PubgApiService
     protected $pubgApi;
     protected $url = "https://api.playbattlegrounds.com/shards/";
     protected $shard = "pc-eu";
-	protected $result;
     protected $query;
     protected $limit = false;
     protected $offset = false;
@@ -182,7 +181,7 @@ class PubgApiService
 
     public function url()
     {
-        return $this->url;
+        return $this->url.$this->query;
     }
 
     public function expandUrl($str)
