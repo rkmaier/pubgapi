@@ -23,7 +23,7 @@
             }
         }
     },
-    "license": "GPLv2",
+    "license": "MIT",
     "authors": [
         {
             "name": "Erik Maier",
