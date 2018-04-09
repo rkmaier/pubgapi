@@ -4,13 +4,13 @@
 
 ` composer require rkmaier/pubgapi dev-master `
 
-` require_once 'vendor/autoload.php'; `
+``` require_once 'vendor/autoload.php'; 
 
-` $data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>; `
+$data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>; 
 
-` $pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); `
+$pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); 
 
-` $pubgAPi->region('pc-eu')->players('rkmaier,molnarz')->get()); `
+$pubgAPi->region('pc-eu')->players('rkmaier,molnarz')->get()); ```
 
 
 
