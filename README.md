@@ -4,10 +4,10 @@
 
 ` composer require rkmaier/pubgapi dev-master `
 
-## Laravel 5.5+ Integration
+### Laravel 5.5+ Integration
 Laravel Pacakage discovery should take care of it
 
-## Laravel 5.* Integration
+### Laravel 5.* Integration
 
 Add the service provider to your `config/app.php` file:
 
