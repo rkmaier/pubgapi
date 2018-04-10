@@ -15,6 +15,9 @@ class PubgApiService
     protected $headers = false;
     protected $access_token = "";
 
+    /**
+     * Set CurlService parameters
+     */
     public function __construct($data =[''])
     {
         $this->pubgApi = new \Ixudra\Curl\CurlService();
@@ -24,40 +27,59 @@ class PubgApiService
         $this->query = "";
     }
         
-
+    /**
+     * Append current url string
+     */
     public function setUrl($url ="")
     {
         $this->query .= $url;
     }
     
+    /**
+     * Set region shard
+     */
     public function setShard($shard = "")
     {
         $this->shard = $shard;
     }
     
+    /**
+     * Set pagination limit
+     */
     public function setLimit($limit = false)
     {
         $this->limit = $limit;
     }
 
+    /**
+     * Set pagination offset
+     */
     public function setOffset($offset = false)
     {
         $this->offset = $offset;
     }
     
-    
+    /**
+     * Set custom headers before making an api call
+     */
     public function setCustomHeaders()
     {
         $token = "Bearer $this->access_token";
         $this->headers = array("Authorization: $token",'Accept: application/vnd.api+json');
     }
 
+    /**
+     * Limit results
+     */
     public function limit($limit)
     {
         $this->setLimit($limit);
         return $this;
     }
 
+    /**
+     * Offset results
+     */
     public function offset($limit)
     {
         $this->setOffset($limit);
@@ -96,12 +118,17 @@ class PubgApiService
         return $this;
     }
 
+    /**
+     * Set match query
+     */
     public function match($matchID = "")
     {
         $this->setUrl("/matches/$matchID");
         return $this;
     }
-
+    /**
+     * Set matches query
+     */
     public function matches()
     {
         $this->setUrl("/matches");
@@ -160,7 +187,9 @@ class PubgApiService
         return $this->get()['meta'];
     }
 
-    
+    /**
+     * Get query results
+     */
     public function get()
     {
         $url = $this->buildQuery();
@@ -178,12 +207,17 @@ class PubgApiService
         return $url;
     }
     
-
+    /**
+     * Return url
+     */
     public function url()
     {
         return $this->url.$this->query;
     }
 
+    /**
+     *  Expand url with additional params
+     */
     public function expandUrl($str)
     {
         if (strpos($str, '?') !== false) {
