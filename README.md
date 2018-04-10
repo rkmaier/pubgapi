@@ -87,7 +87,7 @@ PubgApi::region('pc-eu')->match('<MATCH_ID>')->get();
 ###### Pagination
 
 ```php
-PubgApi::region('pc-eu')->players('<PLAYER_ID1>','<PLAYER_ID2>','','<PLAYER_ID3>')->limit(1)->offset(2)->get();
+PubgApi::region('pc-eu')->players('<PLAYER_ID1>','<PLAYER_ID2>','<PLAYER_ID3>')->limit(1)->offset(2)->get();
 ```
 
 
