@@ -1,13 +1,13 @@
-## A PHP Wrapper for the Official PUBG Dev API
+# A PHP Wrapper for the Official PUBG Dev API
 
-#### Installation 
+## Installation 
 
 ` composer require rkmaier/pubgapi dev-master `
 
-#### Laravel 5.5+ Integration
+### Laravel 5.5+ Integration
 Laravel Pacakage discovery should take care of it
 
-#### Laravel 5.* Integration
+### Laravel 5.* Integration
 
 Add the service provider to your `config/app.php` file:
 
@@ -44,12 +44,7 @@ Add the facade to your `config/app.php` file:
 return [
 
     'api_url'=>'https://api.playbattlegrounds.com/shards/',
-
-    'shards' => [
-        'eu' => 'pc-eu',
-        'na' => 'pc-na',
-    ],
-
+    'region' => 'pc-eu',
     'access_token' =>'',
 
 ];
@@ -57,7 +52,7 @@ return [
 ```
 
 
-#### Laravel
+### Laravel
 
 ###### Get API Status
 
@@ -96,7 +91,7 @@ PubgApi::region('pc-eu')->players('<PLAYER_ID1>','<PLAYER_ID2>','','<PLAYER_ID3>
 ```
 
 
-#### PHP without Laravel 
+### PHP without Laravel 
 
 ```php
 
@@ -108,4 +103,10 @@ $pubgAPi->region('pc-eu')->players('rkmaier,molnarz,Istvan92,zuuup,Aigialeusz')-
 
 ```
 
+
+## License
+
+Pubgapi is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+
+Copyright 2018 Erik Maier
 
