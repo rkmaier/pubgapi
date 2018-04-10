@@ -193,10 +193,17 @@ class PubgApiService
     public function get()
     {
         $url = $this->buildQuery();
-        return collect($this->pubgApi->to($url)->withHeaders($this->headers)->asJsonResponse()->get());
+        try{
+         $result =  $this->pubgApi->to($url)->withHeaders($this->headers)->asJsonResponse()->get();
+        }catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return collect($result);
     }
 
-
+    /**
+     * Build query
+     */
     protected function buildQuery()
     {
         $this->setCustomHeaders();
