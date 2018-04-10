@@ -1,10 +1,10 @@
 {
     "name": "rkmaier/pubgapi",
     "description": "A PUBG Developer API Wrapper for PHP and Laravel",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "type": "project",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=7.0.0",
         "ixudra/curl": "6.*",
         "pragmarx/ia-collection": "5.6.*"
     },
