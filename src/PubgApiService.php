@@ -1,6 +1,7 @@
 <?php
 
 namespace Rkmaier\Pubgapi;
+
 use IlluminateAgnostic\Collection\Support\Collection;
 
 class PubgApiService
@@ -19,37 +20,37 @@ class PubgApiService
         $this->pubgApi = new \Ixudra\Curl\CurlService();
         $this->url = isset($data['uri']) ? $data['uri'] : $this->url;
         $this->access_token = isset($data['access_token']) ? $data['access_token'] : "";
-		$this->shard = isset($data['region']) ? $data['region'] : 'pc-eu';
+        $this->shard = isset($data['region']) ? $data['region'] : 'pc-eu';
         $this->query = "";
     }
         
 
     public function setUrl($url ="")
     {
-		$this->query .= $url;
+        $this->query .= $url;
     }
     
     public function setShard($shard = "")
     {
-		$this->shard = $shard;
+        $this->shard = $shard;
     }
     
     public function setLimit($limit = false)
     {
-		$this->limit = $limit;
+        $this->limit = $limit;
     }
 
     public function setOffset($offset = false)
     {
-		$this->offset = $offset;
+        $this->offset = $offset;
     }
     
-	
-	public function setCustomHeaders()
-	{
-		$token = "Bearer $this->access_token";
-		$this->headers = array("Authorization: $token",'Accept: application/vnd.api+json');
-	}
+    
+    public function setCustomHeaders()
+    {
+        $token = "Bearer $this->access_token";
+        $this->headers = array("Authorization: $token",'Accept: application/vnd.api+json');
+    }
 
     public function limit($limit)
     {
@@ -68,7 +69,7 @@ class PubgApiService
      */
     public function players($palyer)
     {
-		$this->setUrl("/players?filter[playerNames]=$palyer");
+        $this->setUrl("/players?filter[playerNames]=$palyer");
         return $this;
     }
     /**
@@ -76,20 +77,20 @@ class PubgApiService
      */
     public function player($palyerID)
     {
-		$this->setUrl("/players/$palyerID");
+        $this->setUrl("/players/$palyerID");
         return $this;
     }
 
     /**
      * Set region
      */
-    public function region( $shard = "pc-eu")
+    public function region($shard = "pc-eu")
     {
         $this->setShard($shard);
         return $this;
     }
 
-    public function sort( $field)
+    public function sort($field)
     {
         $this->setSortBy($field);
         return $this;
@@ -97,13 +98,13 @@ class PubgApiService
 
     public function match($matchID = "")
     {
-		$this->setUrl("/matches/$matchID");
+        $this->setUrl("/matches/$matchID");
         return $this;
     }
 
     public function matches()
     {
-		$this->setUrl("/matches");
+        $this->setUrl("/matches");
         return $this;
     }
 
@@ -186,9 +187,8 @@ class PubgApiService
     public function expandUrl($str)
     {
         if (strpos($str, '?') !== false) {
-           return "&";
+            return "&";
         }
         return "?";
     }
-	
 }
