@@ -20,9 +20,6 @@ class PubgApiServiceProvider extends ServiceProvider
     }
 
 
-    /**CurlService
-     * @return void
-     */
     public function register()
     {
         if (file_exists(config_path('pubgapi.php'))) {

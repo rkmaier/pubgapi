@@ -13,14 +13,13 @@ class PubgApiService
     protected $offset = false;
     protected $headers = false;
     protected $access_token = "";
- // protected $sortBy = false;
 
     public function __construct($data =[''])
     {
         $this->pubgApi = new \Ixudra\Curl\CurlService();
         $this->url = isset($data['uri']) ? $data['uri'] : $this->url;
         $this->access_token = isset($data['access_token']) ? $data['access_token'] : "";
-		$this->region = isset($data['region']) ? $data['region'] : 'pc-eu';
+		$this->shard = isset($data['region']) ? $data['region'] : 'pc-eu';
 		$this->response = "";
         $this->query = "";
     }
@@ -64,20 +63,27 @@ class PubgApiService
         $this->setOffset($limit);
         return $this;
     }
-
+    
+    /**
+     * Filter players by player names
+     */
     public function players($palyer)
     {
 		$this->setUrl("/players?filter[playerNames]=$palyer");
         return $this;
     }
-
+    /**
+     * Get player by playerID
+     */
     public function player($palyerID)
     {
 		$this->setUrl("/players/$palyerID");
         return $this;
     }
 
-    
+    /**
+     * Set region
+     */
     public function region( $shard = "pc-eu")
     {
         $this->setShard($shard);
@@ -102,12 +108,6 @@ class PubgApiService
         return $this;
     }
 
-/**
-    protected function setSortBy($field = "")
-    {
-        $this->sortBy = $field;
-    }
-**/
 
     /**
      * Get API Status
