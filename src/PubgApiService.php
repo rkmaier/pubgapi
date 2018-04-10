@@ -20,7 +20,6 @@ class PubgApiService
         $this->url = isset($data['uri']) ? $data['uri'] : $this->url;
         $this->access_token = isset($data['access_token']) ? $data['access_token'] : "";
 		$this->shard = isset($data['region']) ? $data['region'] : 'pc-eu';
-		$this->response = "";
         $this->query = "";
     }
         
@@ -63,7 +62,7 @@ class PubgApiService
         $this->setOffset($limit);
         return $this;
     }
-    
+
     /**
      * Filter players by player names
      */
