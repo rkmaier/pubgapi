@@ -177,7 +177,7 @@ class PubgApiService
 
     public function links()
     {
-        $url = $this->createQuery();
+        $url = $this->buildQuery();
         return $this->get()['links'];
     }
 
