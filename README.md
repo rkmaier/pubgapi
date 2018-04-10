@@ -97,7 +97,7 @@ PubgApi::region('pc-eu')->players('<PLAYER_ID1>','<PLAYER_ID2>','','<PLAYER_ID3>
 
 require_once 'vendor/autoload.php'; 
 
-$data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>; 
+$data['access_token'] = '<YOUR PUBG DEV ACCESS TOKEN>'; 
 $pubgAPi = new \Rkmaier\Pubgapi\PubgApiService($data); 
 $pubgAPi->region('pc-eu')->players('rkmaier,molnarz,Istvan92,zuuup,Aigialeusz')->get());
 
