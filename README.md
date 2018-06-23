@@ -93,7 +93,7 @@ PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->get;
 PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->stat('duo-fpp');
 ```
 
-###### Get Player Matches
+###### Get Player Match IDs
 
 ```php
 PubgApi::region('pc-eu')->player('<PLAYER_NAME')->matches();
