@@ -3,112 +3,114 @@
 namespace Rkmaier\Pubgapi;
 
 use IlluminateAgnostic\Collection\Support\Collection;
+use Rkmaier\PubgapiBaseService;
 
-class PubgApiService
+
+class PubgApiService extends BaseService
 {
-    protected $pubgApi;
-    protected $url = "https://api.playbattlegrounds.com/shards/";
-    protected $shard = "pc-eu";
-    protected $query;
-    protected $limit = false;
-    protected $offset = false;
-    protected $headers = false;
-    protected $access_token = "";
-
+    public $setPlayer = false;
+    
     /**
      * Set CurlService parameters
      */
     public function __construct($data =[''])
     {
-        $this->pubgApi = new \Ixudra\Curl\CurlService();
-        $this->url = isset($data['uri']) ? $data['uri'] : $this->url;
-        $this->access_token = isset($data['access_token']) ? $data['access_token'] : "";
-        $this->shard = isset($data['region']) ? $data['region'] : 'pc-eu';
-        $this->query = "";
+        parent::__construct($data);
     }
         
     /**
      * Append current url string
      */
-    public function setUrl($url ="")
+    public function appendUrl($url ="")
     {
         $this->query .= $url;
     }
-    
-    /**
-     * Set region shard
-     */
-    public function setShard($shard = "")
-    {
-        $this->shard = $shard;
-    }
-    
-    /**
-     * Set pagination limit
-     */
-    public function setLimit($limit = false)
-    {
-        $this->limit = $limit;
-    }
 
-    /**
-     * Set pagination offset
-     */
-    public function setOffset($offset = false)
+    public function setUrl($url ="")
     {
-        $this->offset = $offset;
-    }
-    
-    /**
-     * Set custom headers before making an api call
-     */
-    public function setCustomHeaders()
-    {
-        $token = "Bearer $this->access_token";
-        $this->headers = array("Authorization: $token",'Accept: application/vnd.api+json');
-    }
-
-    /**
-     * Limit results
-     */
-    public function limit($limit)
-    {
-        $this->setLimit($limit);
-        return $this;
-    }
-
-    /**
-     * Offset results
-     */
-    public function offset($limit)
-    {
-        $this->setOffset($limit);
-        return $this;
+        $this->query = $url;
     }
 
     /**
      * Filter players by player names
      */
-    public function players($palyer)
+    public function players($player)
     {
-        $this->setUrl("/players?filter[playerNames]=$palyer");
+        $this->appendUrl("/players?filter[playerNames]=$player");
         return $this;
     }
     /**
      * Get player by playerID
      */
-    public function player($palyerID)
+    public function player($playerName)
     {
-        $this->setUrl("/players/$palyerID");
+        $playerID = $this->getPlayerAccountID($playerName);
+        $this->appendUrl("/players/$playerID");
+        $this->setPlayer = true;
+        return $this;
+    }
+
+    /**
+     * Find Player Account ID
+     */
+    public function getPlayerAccountID($playerID)
+    {
+        $response  = $this->players($playerID)->get();
+        $this->clearQuery();
+        return $response['data'][0]->id;
+    }
+
+    /**
+     * Retrieve Player Account ID 
+     */
+    public function getPlayerAccount($playerID)
+    {
+        if (!str_contains($playerID,"account")) {
+            return $this->getPlayerAccountID($playerID);
+        }
+        return $playerID;
+    }
+
+    /**
+     * Get current player Season 
+     */
+    public function getCurrentSeason()
+    {
+        $response  = $this->seasons()->data();
+        $this->clearQuery();
+        foreach ($response as $season) {
+            if ($season->attributes->isCurrentSeason) {
+                $seasonID = $season->id;
+            }
+        }
+        return $seasonID;
+    }
+
+
+    public function playerStats($playerID, $seasonID = "")
+    {
+        $seasonID = !empty($season) ? $seasonID : $this->getCurrentSeason();
+        $playerID = $this->getPlayerAccount($playerID);
+        $this->setUrl("/players/$playerID/seasons/$seasonID");
+        return $this;
+    }
+
+
+    /**
+     * Get player Seasons
+     */
+    public function seasons()
+    {
+        $this->appendUrl("/seasons");
         return $this;
     }
 
     /**
      * Set region
      */
-    public function region($shard = "pc-eu")
+    public function region($ss = "pc-eu")
     {
-        $this->setShard($shard);
+        $this->setShard($ss);
         return $this;
     }
 
@@ -123,7 +125,7 @@ class PubgApiService
      */
     public function match($matchID = "")
     {
-        $this->setUrl("/matches/$matchID");
+        $this->appendUrl("/matches/$matchID");
         return $this;
     }
     /**
@@ -131,8 +133,11 @@ class PubgApiService
      */
     public function matches()
     {
-        $this->setUrl("/matches");
-        return $this;
+        if($this->setPlayer)
+        {
+           return $this->data()->relationships->matches->data;
+        }
+        return false;
     }
 
 
@@ -175,6 +180,13 @@ class PubgApiService
         return $this->get()['included'];
     }
 
+    public function stats($filter = "")
+    {
+        $url = $this->buildQuery();
+        return empty($filter)  ? $this->data()->attributes->gameModeStats : $this->data()->attributes->gameModeStats->{$filter};
+    }
+
+
     public function links()
     {
         $url = $this->buildQuery();
@@ -185,51 +197,5 @@ class PubgApiService
     {
         $url = $this->buildQuery();
         return $this->get()['meta'];
-    }
-
-    /**
-     * Get query results
-     */
-    public function get()
-    {
-        $url = $this->buildQuery();
-        try {
-            $result =  $this->pubgApi->to($url)->withHeaders($this->headers)->asJsonResponse()->get();
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return collect($result);
-    }
-
-    /**
-     * Build query
-     */
-    protected function buildQuery()
-    {
-        $this->setCustomHeaders();
-        $url = $this->url.$this->shard.$this->query;
-        $arr=['page[limit]'=>$this->limit ? $this->limit :0,'page[offset]' => $this->offset ?  $this->offset : 0];
-        $filter = $url.$this->expandUrl($url). http_build_query($arr);
-        $url = $this->limit || $this->offset ? $filter : $url;
-        return $url;
-    }
-    
-    /**
-     * Return url
-     */
-    public function url()
-    {
-        return $this->url.$this->query;
-    }
-
-    /**
-     *  Expand url with additional params
-     */
-    public function expandUrl($str)
-    {
-        if (strpos($str, '?') !== false) {
-            return "&";
-        }
-        return "?";
     }
 }
