@@ -82,6 +82,11 @@ PubgApi::region('pc-eu')->player('<PLAYER_ID>')->get();
 ```php
 PubgApi::region('pc-eu')->player('<PLAYER_NAME')->get();
 ```
+###### Get Seasons
+
+```php
+PubgApi::region('pc-eu')->seasons()->get();
+```
 
 ###### Get Player Stats
 
@@ -91,6 +96,10 @@ PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->get;
 
 ```php
 PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->stat('duo-fpp');
+```
+
+```php
+PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME','<SEASON_ID>')->stat('duo-fpp');
 ```
 
 ###### Get Player Match IDs
