@@ -74,11 +74,31 @@ PubgApi::region('pc-na')
 PubgApi::region('pc-na')->players('shroud')->get();
 ```
 
-###### Filter by Player ID
+###### Get Player Info
 
 ```php
 PubgApi::region('pc-eu')->player('<PLAYER_ID>')->get();
 ```
+```php
+PubgApi::region('pc-eu')->player('<PLAYER_NAME')->get();
+```
+
+###### Get Player Stats
+
+```php
+PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->get;
+```
+
+```php
+PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->stat('duo-fpp');
+```
+
+###### Get Player Matches
+
+```php
+PubgApi::region('pc-eu')->player('<PLAYER_NAME')->matches();
+```
+
 
 ###### Filter by Match ID
 
