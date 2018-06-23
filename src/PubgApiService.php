@@ -180,7 +180,7 @@ class PubgApiService extends BaseService
         return $this->get()['included'];
     }
 
-    public function stats($filter = "")
+    public function stat($filter = "")
     {
         $url = $this->buildQuery();
         return empty($filter)  ? $this->data()->attributes->gameModeStats : $this->data()->attributes->gameModeStats->{$filter};
