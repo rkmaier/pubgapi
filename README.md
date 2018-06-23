@@ -94,7 +94,11 @@ PubgApi::region('pc-eu')->seasons()->get();
 PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->get;
 ```
 
-// Current Season by default 
+
+
+```php
+PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->get(); // Current Season by default 
+```
 
 ```php
 PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->stat('duo-fpp');
