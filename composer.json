@@ -1,7 +1,7 @@
 {
     "name": "rkmaier/pubgapi",
     "description": "A PUBG Developer API Wrapper for PHP and Laravel",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "type": "library",
     "require": {
         "php": ">=7.0.0",
