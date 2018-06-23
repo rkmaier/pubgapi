@@ -27,8 +27,9 @@ class PubgApiServiceProvider extends ServiceProvider
         } else {
             $this->mergeConfigFrom(realpath(__DIR__.'/../config/pubgapi.php'), 'PubgApi');
         }
-
+      
         $this->app->singleton('PubgApi', function ($app) {
+          
             $config = $app->make('config');
             $data['uri'] = $config->get('PubgApi.api_url');
             $data['region'] = $config->get('PubgApi.region');
