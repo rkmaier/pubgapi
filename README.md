@@ -101,7 +101,7 @@ PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME')->get(); // Current Season 
 ```
 
 ```php
-PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME','SEASON_ID)->get;
+PubgApi::region('pc-eu')->playerStats('<PLAYER_NAME','SEASON_ID')->get;
 ```
 
 ```php
